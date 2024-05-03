@@ -162,7 +162,7 @@ miscRouter.post("/iniciarSesion", async (req, res) => {
         .json({ Result: result.returnValue, Message: errorMessage });
     }
 
-    res.json({ Result: result.returnValue });
+    res.json({ Result: result.returnValue, body: result.recordset });
   } catch {
     res.status(400).json({ Result: -30 });
   }
