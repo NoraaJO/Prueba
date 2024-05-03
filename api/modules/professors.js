@@ -199,7 +199,7 @@ professorsRouter.get("/esCoordinador", async (req, res)=>{
     const pool = await getPool();
     const request = pool.request();
 
-    request.input("inAnno", sql.Int, req.query.idProfesor);
+    request.input("inAnno", sql.Int, req.query.idAnno);
     request.input("inIdUsuario", sql.Int, req.body.idUsuario);
 
     const result = await request.execute("dbo.esCoordinador");
@@ -221,7 +221,7 @@ professorsRouter.get("/esCoordinador", async (req, res)=>{
         .json({ Result: result.returnValue, Message: errorMessage });
     }
 
-    res.json(result.recordset);
+    res.json({ Result: result.returnValue, body: result.recordset });
   } catch {
     res.status(400).json({ Result: -30 });
   }
