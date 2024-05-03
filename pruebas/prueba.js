@@ -2,6 +2,8 @@ const express = require("express");
 const sql = require("mssql");
 const xlsx = require("xlsx");
 const multer = require("multer");
+const cors = require("cors");
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,6 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(express.raw());
 app.use(express.text());
+app.use(cors());
 
 var dbConfig = {
   user: "admin",
