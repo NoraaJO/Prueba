@@ -344,7 +344,7 @@ app.get("/archivoSede", async (req, res) => {
 });
 //Registrar Profesor
 app.post("/registrarProfe", upload.single("imagen"), async (req, res) => {
-  try {
+  //try {
     await poolConnect;
     const request = pool.request();
     const celular = req.body.celular;
@@ -362,9 +362,9 @@ app.post("/registrarProfe", upload.single("imagen"), async (req, res) => {
     request.input("InImagen", sql.VARCHAR(128), req.file.path);
     const result = await request.execute("dbo.AgregarProfesor");
     res.json({ Result: result.returnValue });
-  } catch {
-    res.status(400).json({ Result: -30 });
-  }
+  //} catch {
+    //res.status(400).json({ Result: -30 });
+  //}
 });
 //Registrar Actividad
 app.post("/registrarAct", upload.single("afiche"), async (req, res) => {
@@ -405,16 +405,16 @@ app.post("/registrarEqui", async (req, res) => {
 });
 //Registrar Plan de Trabajo
 app.post("/registrarPlan", async (req, res) => {
-  //try {
+  try {
     await poolConnect;
     const request = pool.request();
     request.input("inIdEquipo", sql.Int, req.body.idEquipo);
     request.input("inPeriodo", sql.Int, req.body.periodo);
     const result = await request.execute("dbo.insertarPlan");
     res.json({ Result: result.returnValue });
-  //} catch {
-    res.status(400).json({ Result: -30 });
-  //}
+  } catch {
+    //res.status(400).json({ Result: -30 });
+  }
 });
 //Actividad Realizada
 app.post("/actividadRealiza",upload.single("justificacion"),async (req, res) => {
