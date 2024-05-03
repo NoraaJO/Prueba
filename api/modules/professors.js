@@ -194,6 +194,39 @@ professorsRouter.get("/obtenerDatosProfeso", async (req, res) => {
   }
 });
 
+professorsRouter.get("/esCoordinador", async (req, res)=>{
+  try {
+    const pool = await getPool();
+    const request = pool.request();
+
+    request.input("inAnno", sql.Int, req.query.idProfesor);
+    request.input("inIdUsuario", sql.Int, req.body.idUsuario);
+
+    const result = await request.execute("dbo.esCoordinador");
+
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "No se encontro el profesor.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, Message: errorMessage });
+    }
+
+    res.json(result.recordset);
+  } catch {
+    res.status(400).json({ Result: -30 });
+  }
+});
+
 professorsRouter.put(
   "/modificarDatoProfesor",
   upload.single("imagen"),
