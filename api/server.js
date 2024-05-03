@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require("multer");
-const cors = requiere("cors");
+const cors = require("cors");
 const { studentsRouter } = require("./modules/students");
 const { professorsRouter } = require("./modules/professors");
 const { activitiesRouter } = require("./modules/activities");
