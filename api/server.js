@@ -21,7 +21,7 @@ app.use("/activities", activitiesRouter);
 app.use("/comments", commentsRouter);
 app.use("/", miscRouter);
 
-const multer = require("multer");
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
