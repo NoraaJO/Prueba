@@ -218,7 +218,7 @@ professorsRouter.get("/esCoordinador", async (req, res)=>{
       }
       return res
         .status(200)
-        .json({ Result: result.returnValue, Message: errorMessage });
+        .json({ Result: result.returnValue, body: result.recordset });
     }
 
     res.json({ Result: result.returnValue, body: result.recordset });
