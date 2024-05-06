@@ -55,7 +55,9 @@ professorsRouter.post("/agregarProfeEquipo", async (req, res) => {
   try {
     const pool = await getPool();
     const request = pool.request();
-
+    console.log(`Profesor: ${req.body.idProfesor}`)
+    console.log(`Equipo: ${req.body.idEquipo}`)
+    console.log(`Usuario: ${req.body.idUsuario}`)
     request.input("inIdEquipo", sql.Int, req.body.idEquipo);
     request.input("inidProfesor", sql.Int, req.body.idProfesor);
     request.input("inidUsuario", sql.Int, req.body.idUsuario);
