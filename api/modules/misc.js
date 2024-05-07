@@ -191,6 +191,7 @@ miscRouter.get("/obtenerDatosEquipo", async (req, res) => {
 
 miscRouter.get("/obtenerPlanTrabajo", async (req, res) => {
   try {
+    console.log(req.query.idEquipo)
     const pool = await getPool();
     const request = pool.request();
 
