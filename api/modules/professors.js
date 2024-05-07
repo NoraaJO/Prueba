@@ -201,8 +201,6 @@ professorsRouter.get("/esCoordinador", async (req, res)=>{
     const pool = await getPool();
     const request = pool.request();
   
-    console.log(req.query.idAnno);
-    console.log(req.query.idUsuario)
     request.input("inAnno", sql.Int, req.query.idAnno);
     request.input("inIdUsuario", sql.Int, req.query.idUsuario);
 
