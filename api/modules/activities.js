@@ -131,6 +131,72 @@ activitiesRouter.put(
     }
   }
 );
+activitiesRouter.post("/registrarEncargados", async (req, res) => {
+  try {
+    const pool = await getPool();
+    const request = pool.request();
+    var lista = req.body.lista;
+    var buffer = "";
+    lista.forEach((element) => {
+      buffer = buffer + element + ",";
+    });
+    buffer = buffer.slice(0, -1);
+    request.input("inIdProfesor", sql.VarChar(64), buffer);
+    request.input("inIdActividad", sql.Int, req.body.IdActiv);
+    const result = await request.execute("dbo.registrarProfeEncargados");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "Profesor o Actividad no encontrada.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, body: result.recordset });
+    }
+    res.json({ Result: result.returnValue });
+  } catch {
+    res.status(400).json({ Result: -30 });
+  }
+});
+activitiesRouter.get("/obtenerProfesEncargado", async (req, res) => {
+  try {
+    const pool = await getPool();
+    const request = pool.request();
+    var buffer = "";
+    request.input("inIdActividad", sql.Int, req.query.idActividad);
+    const result = await request.execute("dbo.ObtenerProfesEncargador");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "Actividad no encontrada.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, body: errorMessage });
+    }
+    result.recordset.forEach((row) => {
+      buffer = buffer + row.Nombre + ",";
+    });
+    buffer = buffer.slice(0, -1);
+    res.json({ Result: result.returnValue, body: buffer });
+  } catch {
+    res.status(400).json({ Result: -30 });
+  }
+});
 
 activitiesRouter.get("/obtenerDatosActividad", async (req, res) => {
   try {
