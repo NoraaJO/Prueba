@@ -25,6 +25,15 @@ activitiesRouter.post(
   upload.single("afiche"),
   async (req, res) => {
     try {
+      console.log(req.body.semana);
+      console.log(req.body.nombre);
+      console.log(req.body.tipo);
+      console.log(req.body.fechaReal);
+      console.log(req.body.modalidad);
+      console.log(req.body.enlace);
+      console.log(req.file.filename);
+      console.log(req.body.idPlTr);
+      console.log(req.body.cantRecord);
       const pool = await getPool();
       const request = pool.request();
 
