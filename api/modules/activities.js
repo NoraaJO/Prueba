@@ -117,6 +117,9 @@ activitiesRouter.put(
   upload.single("justificacion"),
   async (req, res) => {
     try {
+      console.log(req.body.IdActiv);
+      console.log(req.body.estado);
+
       const pool = await getPool();
       const request = pool.request();
 
