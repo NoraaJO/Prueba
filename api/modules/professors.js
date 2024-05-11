@@ -127,10 +127,6 @@ professorsRouter.delete("/darDeBajaProfeEq", async (req, res) => {
 professorsRouter.put("/definirCoordinador", async (req, res) => {
   try {
 
-    console.log(req.body.idEquipo)
-    console.log(req.body.idProfe)
-    console.log(req.body.idAsisAdmin)
-
     const pool = await getPool();
     const request = pool.request();
 
@@ -239,6 +235,19 @@ professorsRouter.put(
   upload.single("imagen"),
   async (req, res) => {
     try {
+
+      console.log(req.body.idProfesor);
+      console.log(req.body.nombre);
+      console.log(req.body.correo);
+      console.log(req.body.ap1);
+      console.log(req.body.ap2);
+      console.log(req.body.celular);
+      console.log(req.body.numOfi);
+      console.log(req.body.exten);
+      console.log(req.file.path);
+      console.log(req.body.idUsEnc);
+
+
       const pool = await getPool();
       const request = pool.request();
 
