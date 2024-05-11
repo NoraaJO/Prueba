@@ -6,6 +6,8 @@ const commentsRouter = express.Router();
 
 commentsRouter.get("/obtenerComentarios", async (req, res) => {
   try {
+    console.log(req.query.idActividad)
+
     const pool = await getPool();
     const request = pool.request();
 
