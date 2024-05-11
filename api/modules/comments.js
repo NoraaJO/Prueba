@@ -6,8 +6,6 @@ const commentsRouter = express.Router();
 
 commentsRouter.get("/obtenerComentarios", async (req, res) => {
   try {
-    console.log(req.query.idActividad)
-
     const pool = await getPool();
     const request = pool.request();
 
@@ -40,6 +38,11 @@ commentsRouter.get("/obtenerComentarios", async (req, res) => {
 
 commentsRouter.post("/insertarComentario", async (req, res) => {
   try {
+    console.log(req.body.idActividad)
+    console.log(req.body.comentario)
+    console.log(req.body.fecha)
+    console.log(req.body.idProfesor)
+
     const pool = await getPool();
     const request = pool.request();
 
