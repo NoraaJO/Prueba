@@ -185,7 +185,7 @@ activitiesRouter.get("/obtenerProfesEncargado", async (req, res) => {
           errorMessage = "Error.";
       }
       return res
-        .status(400)
+        .status(200)
         .json({ Result: result.returnValue, body: errorMessage });
     }
     result.recordset.forEach((row) => {
