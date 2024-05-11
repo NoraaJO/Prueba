@@ -245,7 +245,7 @@ professorsRouter.put(
       console.log(req.body.celular);
       console.log(req.body.numOfi);
       console.log(req.body.exten);
-      console.log(req.file.path);
+      console.log(req.file);
       console.log(req.body.idUsEnc);
 
 
