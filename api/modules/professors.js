@@ -126,6 +126,11 @@ professorsRouter.delete("/darDeBajaProfeEq", async (req, res) => {
 
 professorsRouter.put("/definirCoordinador", async (req, res) => {
   try {
+
+    console.log(req.body.idEquipo)
+    console.group(req.body.idProfe)
+    console.group(req.body.idAsisAdmin)
+    
     const pool = await getPool();
     const request = pool.request();
 
