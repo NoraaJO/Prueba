@@ -50,6 +50,36 @@ professorsRouter.post(
     }
   }
 );
+professorsRouter.post(
+  "/registrarProfeSinImagen",
+  async (req, res) => {
+    try {
+      const pool = await getPool();
+      const request = pool.request();
+
+      const celular = req.body.celular;
+      const numOfi = req.body.numOfi;
+      const extension = req.body.exten;
+
+      request.input("InCorreo", sql.VarChar(64), req.body.correo);
+      request.input("InPassword", sql.VarChar(32), req.body.password);
+      request.input("InSede", sql.VarChar(32), req.body.sede);
+      request.input("InNombre", sql.VarChar(32), req.body.nombre);
+      request.input("InApellido1", sql.VarChar(32), req.body.ap1);
+      request.input("InApellido2", sql.VarChar(64), req.body.ap2);
+      request.input("InCelular", sql.Int, celular.toString());
+      request.input("InNumOficina", sql.Int, numOfi.toString());
+      request.input("InExtension", sql.Int, extension.toString());
+      request.input("InImagen", sql.VarChar(128), " ");
+
+      const result = await request.execute("dbo.AgregarProfesor");
+
+      res.json({ Result: result.returnValue });
+    } catch {
+      res.status(400).json({ Result: -30 });
+    }
+  }
+);
 
 professorsRouter.post("/agregarProfeEquipo", async (req, res) => {
   try {
