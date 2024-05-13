@@ -196,14 +196,7 @@ studentsRouter.get("/archivoAll", async (req, res) => {
 
 studentsRouter.put("/actualizarEstudiante", async (req, res) => {
   try {
-    console.log(req.body.idUsEnc)
-    console.log(req.body.idEstudiante)
-    console.log(req.body.nombre)
-    console.log(req.body.apellido1)
-    console.log(req.body.apellido2)
-    console.log(req.body.celular)
-    console.log(req.body.correo)
-
+  
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdUsEnc", sql.Int, req.body.idUsEnc);
