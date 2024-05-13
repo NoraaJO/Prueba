@@ -235,7 +235,7 @@ professorsRouter.put(
   upload.single("imagen"),
   async (req, res) => {
     
-    try {
+    //try {
 
       console.log(req.body.idProfesor)
       console.log(req.body.nombre)
@@ -285,9 +285,9 @@ professorsRouter.put(
       }
 
       res.json({ Result: result.returnValue });
-    } catch {
-      res.status(400).json({ Result: -30 });
-    }
+    //} catch {
+      //res.status(400).json({ Result: -30 });
+    //}
   }
 );
 
