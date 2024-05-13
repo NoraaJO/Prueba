@@ -236,6 +236,18 @@ professorsRouter.put(
   async (req, res) => {
     
     try {
+
+      console.log(req.body.idProfesor)
+      console.log(req.body.nombre)
+      console.log(req.body.correo)
+      console.log(req.body.ap1)
+      console.log(req.body.ap2)
+      console.log(req.body.celular)
+      console.log(req.body.numOfi)
+      console.log(req.body.exten)
+      console.log(req.file.path)
+      console.log(req.body.idUsEnc)
+      
       const pool = await getPool();
       const request = pool.request();
 
