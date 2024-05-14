@@ -33,8 +33,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const privateKey = fs.readFileSync('ruta/a/tu/clave.privada');
-const certificate = fs.readFileSync('ruta/a/tu/certificado.ssl');
+const privateKey = fs.readFileSync('server.key');
+const certificate = fs.readFileSync('server.cert');
 
 const server = https.createServer({
     key: privateKey,
