@@ -41,6 +41,6 @@ const server = https.createServer({
     cert: certificate
 }, app);
 
-server.listen(3000, () => {
+server.listen(443, () => {
   console.log(`Server running on port 443`);
 });
