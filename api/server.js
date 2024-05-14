@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-
+/*
 const privateKey = fs.readFileSync('server.key');
 const certificate = fs.readFileSync('server.cert');
 
@@ -40,7 +40,7 @@ const server = https.createServer({
     key: privateKey,
     cert: certificate
 }, app);
-
-server.listen(443, () => {
+*/
+app.listen(3000, () => {
   console.log(`Server running on port 443`);
 });
