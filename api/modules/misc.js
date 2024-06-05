@@ -136,7 +136,7 @@ miscRouter.put("/cambiarPassword", async (req, res) => {
 });
 
 miscRouter.post("/iniciarSesion", async (req, res) => {
-  //try {
+  try {
     const pool = await getPool();
     const request = pool.request();
 
@@ -163,9 +163,9 @@ miscRouter.post("/iniciarSesion", async (req, res) => {
     }
 
     res.json({ Result: result.returnValue, body: result.recordset });
-  //} catch {
-    //res.status(400).json({ Result: -30 });
-  //}
+  } catch {
+    res.status(400).json({ Result: -30 });
+  }
 });
 
 miscRouter.get("/obtenerDatosEquipo", async (req, res) => {
@@ -375,6 +375,62 @@ miscRouter.put("/notificacionLeida", async(req, res)=>{
       switch (result.returnValue) {
         case -1:
           errorMessage = "No se encontro la notificacion.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, Message: errorMessage });
+    }
+    res.json({Result: result.returnValue});
+  }
+  catch{
+    res.status(400).json({ Result: -30 });
+  }
+});
+miscRouter.delete("/borrarNotificacion", async(req, res)=>{
+  try{
+    const pool = await getPool();
+    const request = pool.request();
+    request.input("inIdNotificacion", sql.Int, req.body.idNoti);
+    const result = await request.execute("dbo.EliminarNotificacion");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "No se encontro la notificacion.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, Message: errorMessage });
+    }
+    res.json({Result: result.returnValue});
+  }
+  catch{
+    res.status(400).json({ Result: -30 });
+  }
+});
+miscRouter.delete("/borrarNotiUsuario", async(req, res)=>{
+  try{
+    const pool = await getPool();
+    const request = pool.request();
+    request.input("inIdUsuario", sql.Int, req.body.idUsuario);
+    const result = await request.execute("dbo.setNotificacionLeida");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "No se encontro el usuario.";
           break;
         case -2:
           errorMessage = "Error inesperado.";
