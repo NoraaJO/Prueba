@@ -425,7 +425,7 @@ miscRouter.delete("/borrarNotiUsuario", async(req, res)=>{
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdUsuario", sql.Int, req.body.idUsuario);
-    const result = await request.execute("dbo.setNotificacionLeida");
+    const result = await request.execute("dbo.BorrarTodasNotificacion");
     if (result.returnValue < 1) {
       let errorMessage;
       switch (result.returnValue) {
