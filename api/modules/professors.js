@@ -238,6 +238,7 @@ professorsRouter.put(
   "/modificarDatoProfesor",
   upload.single("imagen"),
   async (req, res) => {
+    
     try {
       const pool = await getPool();
       const request = pool.request();

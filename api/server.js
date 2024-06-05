@@ -1,6 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
+const https = require("https");
+const fs = require("fs");
 const { studentsRouter } = require("./modules/students");
 const { professorsRouter } = require("./modules/professors");
 const { activitiesRouter } = require("./modules/activities");
@@ -30,7 +32,15 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
+/*
+const privateKey = fs.readFileSync('server.key');
+const certificate = fs.readFileSync('server.cert');
 
+const server = https.createServer({
+    key: privateKey,
+    cert: certificate
+}, app);
+*/
 app.listen(3000, () => {
   console.log(`Server running on port 3000`);
 });
