@@ -136,7 +136,7 @@ miscRouter.put("/cambiarPassword", async (req, res) => {
 });
 
 miscRouter.post("/iniciarSesion", async (req, res) => {
-  //try {
+  try {
     const pool = await getPool();
     const request = pool.request();
 
@@ -163,9 +163,9 @@ miscRouter.post("/iniciarSesion", async (req, res) => {
     }
 
     res.json({ Result: result.returnValue, body: result.recordset });
-  //} catch {
+  } catch {
     //res.status(400).json({ Result: -30 });
-  //}
+  }
 });
 
 miscRouter.get("/obtenerDatosEquipo", async (req, res) => {
