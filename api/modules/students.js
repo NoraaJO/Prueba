@@ -319,6 +319,8 @@ studentsRouter.get("/obtenerEstudiante", async (req, res) => {
 });
 studentsRouter.get("/obtDetailEstudiante", async(req, res)=>{
   try{
+    console.log(req.query.idUsuario)
+
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdUsuario", sql.Int, req.query.idUsuario);
