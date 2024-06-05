@@ -41,8 +41,8 @@ activitiesRouter.post(
       request.input("inEnlance", sql.VarChar(128), req.body.enlace);
       request.input("inAfiche", sql.VarChar(256), req.file.filename);
       request.input("inIdPlanTrb", sql.Int, idPlanTrb);
-      request.input("inCantRecord", sql.Int, cantRecord);
-
+      request.input("inFreqRecord", sql.Int, cantRecord);
+      request.input("inFechaPublica", sql.Date, req.body.fechaPubli);
       const result = await request.execute("dbo.agregarAct");
 
       res.json({ Result: result.returnValue });
@@ -291,6 +291,34 @@ activitiesRouter.get("/spObtenerActivi", async (req, res) => {
 
     res.json(result.recordset);
   } catch {
+    res.status(400).json({ Result: -30 });
+  }
+});
+activitiesRouter.get("/obtenerActPlaneadas", async(req, res)=>{
+  try{
+    const pool = await getPool();
+    const request = pool.request();
+    request.input("inAnno", sql.Int, req.query.anno);
+    const result = await request.execute("dbo.ObtenerActividadesPlaneadas");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "No se encontro la sede o el estudiante.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, Message: errorMessage });
+    }
+    res.json(result.recordset);
+  }
+  catch{
     res.status(400).json({ Result: -30 });
   }
 });

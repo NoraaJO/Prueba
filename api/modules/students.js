@@ -316,5 +316,62 @@ studentsRouter.get("/obtenerEstudiante", async (req, res) => {
     res.status(400).json({ Result: -30 });
   }
 });
+studentsRouter.get("/obtDetailEstudiante", async(req, res)=>{
+  try{
+    const pool = await getPool();
+    const request = pool.request();
+    request.input("inIdUsuario", sql.Int, req.query.idUsuario);
+    const result = await request.execute("dbo.verDetallesEstudiante");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "No se encontro el estudiante.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(200)
+        .json({ Result: result.returnValue, Message: errorMessage });
+    }
+    res.json(result.recordset);
+ }
+  catch{
+    res.status(400).json({ Result: -30 });
+  }
+});
+studentsRouter.put("/modificarDatosEst", upload.single("imagen"),async(req, res)=>{
+  try{
+    const pool = await getPool();
+    const request = pool.request();
+    request.input("inIdEstudiante", sql.Int, req.body.idEstudiante);
+    request.input("inCelular", sql.Int, req.body.celular);
+    request.input("inFoto", sql.VarChar(256), req.file.path);
+    const result = await request.execute("dbo.ModificarDatosEstudiantes");
+    if (result.returnValue < 1) {
+      let errorMessage;
+      switch (result.returnValue) {
+        case -1:
+          errorMessage = "No se encontro el estudiante.";
+          break;
+        case -2:
+          errorMessage = "Error inesperado.";
+          break;
+        default:
+          errorMessage = "Error.";
+      }
+      return res
+        .status(400)
+        .json({ Result: result.returnValue, Message: errorMessage });
+    }
+    res.json({Result: result.returnValue});
+  }catch{
+    res.status(400).json({ Result: -30 });
+  }
+});
 
 module.exports = { studentsRouter };

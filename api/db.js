@@ -3,7 +3,7 @@ const sql = require("mssql");
 const dbConfig = {
   user: "admin",
   password: "PnGJpG124",
-  server: "databasedsw.cdcswyy0yssz.us-east-2.rds.amazonaws.com",
+  server: "database-dsw.crs4isccq6xa.us-east-2.rds.amazonaws.com",
   port: 1433,
   database: "GETG",
   options: {
