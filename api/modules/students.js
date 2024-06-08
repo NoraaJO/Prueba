@@ -347,10 +347,6 @@ studentsRouter.get("/obtDetailEstudiante", async(req, res)=>{
 });
 studentsRouter.put("/modificarDatosEst", upload.single("imagen"),async(req, res)=>{
   try{
-    console.log(req.body.idEstudiante)
-    console.log(req.body.celular)
-    console.log(req.file.path)
-
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdEstudiante", sql.Int, req.body.idEstudiante);
@@ -380,6 +376,9 @@ studentsRouter.put("/modificarDatosEst", upload.single("imagen"),async(req, res)
 });
 studentsRouter.put("/modificarDatosEstSinImagen", async(req, res)=>{
   try{
+    console.log(req.body.idEstudiante)
+    console.log(req.body.celular)
+    
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdEstudiante", sql.Int, req.body.idEstudiante);
