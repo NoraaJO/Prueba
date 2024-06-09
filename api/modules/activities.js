@@ -24,7 +24,7 @@ activitiesRouter.post(
   "/registrarAct",
   upload.single("afiche"),
   async (req, res) => {
-    try {
+    //try {
       console.log("Nombre: " + req.body.nombre);
       console.log("Tipo: " + req.body.tipo);
       console.log("Fecha Realizacion: " + req.body.fechaReal);
@@ -59,9 +59,9 @@ activitiesRouter.post(
       const result = await request.execute("dbo.agregarAct");
 
       res.json({ Result: result.returnValue });
-    } catch {
-      res.status(400).json({ Result: -30 });
-    }
+    //} catch {
+      //res.status(400).json({ Result: -30 });
+    //}
   }
 );
 
