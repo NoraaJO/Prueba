@@ -54,7 +54,6 @@ activitiesRouter.post(
       request.input("inAfiche", sql.VarChar(256), req.file.filename);
       request.input("inIdPlanTrb", sql.Int, idPlanTrb);
       request.input("inFreqRecord", sql.Int, cantRecord);
-      request.input("inFechaPublica", sql.Date, req.body.fechaPubli);
       request.input("inDiasPublicacion", sql.Int, req.body.diasPubli);
       const result = await request.execute("dbo.agregarAct");
 
