@@ -24,19 +24,7 @@ activitiesRouter.post(
   "/registrarAct",
   upload.single("afiche"),
   async (req, res) => {
-    //try {
-      console.log("Nombre: " + req.body.nombre);
-      console.log("Tipo: " + req.body.tipo);
-      console.log("Fecha Realizacion: " + req.body.fechaReal);
-      console.log("Modalidad: " + req.body.modalidad);
-      console.log("Enlance: " + req.body.enlace);
-      console.log("Afiche: "+ req.file.filename);
-      console.log("Plan de trabajo: " + req.body.idPlTr);
-      console.log("Recordatorios: " + req.body.cantRecord);
-      console.log("Publicacion: "+ req.body.fechaPubli);
-      console.log("Semana: "+ req.body.semana);
-      console.log("Dias de publicacion: "+ req.body.diasPubli);
-
+    try {
       const pool = await getPool();
       const request = pool.request();
 
@@ -58,9 +46,9 @@ activitiesRouter.post(
       const result = await request.execute("dbo.agregarAct");
 
       res.json({ Result: result.returnValue });
-    //} catch {
-      //res.status(400).json({ Result: -30 });
-    //}
+    } catch {
+      res.status(400).json({ Result: -30 });
+    }
   }
 );
 
