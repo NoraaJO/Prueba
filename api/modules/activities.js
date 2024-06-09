@@ -35,6 +35,7 @@ activitiesRouter.post(
       console.log("Recordatorios: " + req.body.cantRecord);
       console.log("Publicacion: "+ req.body.fechaPubli);
       console.log("Semana: "+ req.body.semana);
+      console.log("Dias de publicacion: "+ req.body.diasPubli);
 
       const pool = await getPool();
       const request = pool.request();
@@ -54,6 +55,7 @@ activitiesRouter.post(
       request.input("inIdPlanTrb", sql.Int, idPlanTrb);
       request.input("inFreqRecord", sql.Int, cantRecord);
       request.input("inFechaPublica", sql.Date, req.body.fechaPubli);
+      request.input("inDiasPublicacion", sql.Int, req.body.diasPubli);
       const result = await request.execute("dbo.agregarAct");
 
       res.json({ Result: result.returnValue });
