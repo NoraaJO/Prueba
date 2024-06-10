@@ -232,6 +232,9 @@ activitiesRouter.get("/obtenerDatosActividad", async (req, res) => {
 
 activitiesRouter.get("/obtenerProxActividad", async (req, res) => {
   try {
+
+    console.log("Parametros recibidos: ", req.query);
+    
     const pool = await getPool();
     const request = pool.request();
 
