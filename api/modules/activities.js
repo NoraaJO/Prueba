@@ -56,7 +56,10 @@ activitiesRouter.post(
   "/actividadRealiza",
   upload.single("justificacion"),
   async (req, res) => {
-    //try {
+    try {
+      console.log(req.body.IdActiv);
+      console.log(req.file.filename);
+
       const pool = await getPool();
       let request = pool.request();
 
@@ -76,9 +79,9 @@ activitiesRouter.post(
       result = await request.execute("dbo.ActualizarEstado");
 
       res.json({ Result: result.returnValue });
-    //} catch {
-      //res.status(400).json({ Result: -30 });
-    //}
+    } catch {
+      res.status(400).json({ Result: -30 });
+    }
   }
 );
 
