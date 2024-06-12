@@ -57,9 +57,6 @@ activitiesRouter.post(
   upload.single("justificacion"),
   async (req, res) => {
     try {
-      console.log(req.body.IdActiv);
-      console.log(req.file.filename);
-
       const pool = await getPool();
       let request = pool.request();
 
