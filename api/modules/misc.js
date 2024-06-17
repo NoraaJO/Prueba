@@ -338,7 +338,6 @@ miscRouter.get("/obtenerEquipoAnno", async (req, res) =>{
 })
 miscRouter.get("/obtenerNotificaciones", async(req, res)=>{
   try{
-    console.log("UserId: ", req.query.idUsuario);
     const pool = await getPool();
     const request = pool.request();
     request.input("InIdUsuario", sql.Int, req.query.idUsuario);
@@ -367,6 +366,7 @@ miscRouter.get("/obtenerNotificaciones", async(req, res)=>{
 })
 miscRouter.put("/notificacionLeida", async(req, res)=>{
   try{
+    console.log(req.body.idNoti);
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdNotificacion", sql.Int, req.body.idNoti);
