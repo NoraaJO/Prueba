@@ -366,7 +366,6 @@ miscRouter.get("/obtenerNotificaciones", async(req, res)=>{
 })
 miscRouter.put("/notificacionLeida", async(req, res)=>{
   try{
-    console.log(req.body.idNoti);
     const pool = await getPool();
     const request = pool.request();
     request.input("inIdNotificacion", sql.Int, req.body.idNoti);
